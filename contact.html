@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Mapawa Baptist Youth Ministry</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/logo.svg" alt="MBC Logo" class="nav-logo" />
+      <div class="nav-name">Mapawa Baptist<span>Youth Ministry</span></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Sermons</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="prayers.html">Prayers</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <a href="admin/login.php">Admin</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="page-banner">
+  <div class="page-banner-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Contact</div>
+    <h1>Get in Touch</h1>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:start;">
+
+      <!-- Contact Form -->
+      <div class="fade-in">
+        <div class="section-label">Reach Out</div>
+        <h2 class="section-title">We'd Love to Hear from You</h2>
+        <p style="color:var(--text-mid);margin-bottom:32px;">Whether you have a question, want to get involved, or just want to say hello — our doors are open and our team is ready to welcome you.</p>
+
+        <form id="contact-form" style="display:flex;flex-direction:column;gap:0;">
+          <div class="grid-2" style="gap:16px;">
+            <div class="form-group">
+              <label class="form-label" for="c-name">Full Name *</label>
+              <input type="text" id="c-name" class="form-control" placeholder="Your full name" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-age">Age Group</label>
+              <select id="c-age" class="form-control">
+                <option value="">Select…</option>
+                <option>13–15 (Junior High)</option>
+                <option>16–18 (Senior High)</option>
+                <option>19–22 (College)</option>
+                <option>23–30 (Young Adult)</option>
+                <option>31+ (Parent / Leader)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c-email">Email Address</label>
+            <input type="email" id="c-email" class="form-control" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c-subject">Subject</label>
+            <select id="c-subject" class="form-control">
+              <option value="">What's this about?</option>
+              <option>General Inquiry</option>
+              <option>Event Registration</option>
+              <option>Get Involved / Volunteer</option>
+              <option>New to the Ministry</option>
+              <option>Submit Photos</option>
+              <option>Report an Issue</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c-message">Message *</label>
+            <textarea id="c-message" class="form-control" placeholder="Tell us how we can help…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;" onclick="handleContact(event)">
+            Send Message →
+          </button>
+        </form>
+
+        <div id="contact-success" style="display:none;background:linear-gradient(135deg,#1a5c1a,#0d3b0d);border-radius:var(--radius-lg);padding:40px;text-align:center;margin-top:20px;">
+          <div style="font-size:2.5rem;margin-bottom:12px;">✉️</div>
+          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:var(--cream);margin-bottom:10px;">Message Sent!</h3>
+          <p style="font-size:0.98rem;color:rgba(255,249,238,0.8);">Thank you for reaching out. A member of our team will get back to you soon. God bless you!</p>
+        </div>
+      </div>
+
+      <!-- Sidebar Info -->
+      <div style="display:flex;flex-direction:column;gap:20px;" class="fade-in">
+        <div style="background:var(--blue-deep);border-radius:var(--radius-lg);padding:28px;">
+          <h4 style="font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-rich);margin-bottom:18px;">Find Us</h4>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="font-size:1.1rem;line-height:1.4;">📍</span>
+              <div>
+                <div style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,200,66,0.6);margin-bottom:2px;">Address</div>
+                <div style="font-size:0.95rem;color:rgba(255,249,238,0.85);">Mapawa, Cagayan de Oro<br>Misamis Oriental, Philippines</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="font-size:1.1rem;line-height:1.4;">🕐</span>
+              <div>
+                <div style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,200,66,0.6);margin-bottom:2px;">Office Hours</div>
+                <div style="font-size:0.95rem;color:rgba(255,249,238,0.85);">Mon–Fri · 9 AM – 5 PM<br>Sat · 10 AM – 2 PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--cream-dark);border-radius:var(--radius-lg);padding:28px;">
+          <h4 style="font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-mid);margin-bottom:16px;">Service Schedule</h4>
+          <ul style="display:flex;flex-direction:column;gap:10px;">
+            <li style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(13,59,122,0.08);">
+              <span style="font-size:0.92rem;color:var(--text-mid);">Sunday Worship</span>
+              <strong style="font-family:var(--font-display);font-size:0.72rem;color:var(--blue-deep);">9:00 AM</strong>
+            </li>
+            <li style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(13,59,122,0.08);">
+              <span style="font-size:0.92rem;color:var(--text-mid);">Bible Study</span>
+              <strong style="font-family:var(--font-display);font-size:0.72rem;color:var(--blue-deep);">Wed 6 PM</strong>
+            </li>
+            <li style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(13,59,122,0.08);">
+              <span style="font-size:0.92rem;color:var(--text-mid);">Prayer Meeting</span>
+              <strong style="font-family:var(--font-display);font-size:0.72rem;color:var(--blue-deep);">Fri 7 PM</strong>
+            </li>
+            <li style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;">
+              <span style="font-size:0.92rem;color:var(--text-mid);">Youth Gathering</span>
+              <strong style="font-family:var(--font-display);font-size:0.72rem;color:var(--blue-deep);">Sat 4 PM</strong>
+            </li>
+          </ul>
+        </div>
+
+        <div style="background:linear-gradient(135deg,var(--burgundy),var(--burgundy-dk));border-radius:var(--radius-lg);padding:24px;text-align:center;">
+          <div style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-rich);margin-bottom:8px;">New Here?</div>
+          <p style="font-size:0.92rem;color:rgba(255,249,238,0.85);margin-bottom:14px;">Come as you are. We are a community that welcomes every young person. You are not alone.</p>
+          <a href="about.html" class="btn btn-gold btn-sm">Learn More →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/images/logo.svg" alt="MBC Logo" style="width:64px;margin-bottom:12px;" />
+      <p>Mapawa Baptist Church Youth Ministry — raising a generation for God's glory in Cagayan de Oro.</p>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><ul>
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Sermons</a></li><li><a href="events.html">Events</a></li>
+      <li><a href="gallery.html">Gallery</a></li><li><a href="prayers.html">Prayers</a></li>
+      <li><a href="admin/login.php">⚙️ Admin Portal</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Service Times</h4><ul>
+      <li><a href="#">Sunday Worship · 9 AM</a></li><li><a href="#">Bible Study · Wed 6 PM</a></li>
+      <li><a href="#">Prayer Meeting · Fri 7 PM</a></li><li><a href="#">Youth Gathering · Sat 4 PM</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul>
+      <li><a href="#">📍 Mapawa, CDO</a></li>
+      <li><a href="prayers.html">🙏 Prayer Requests</a></li>
+      <li><a href="admin/login.php">⚙️ Admin Portal</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><div class="container">© <span id="current-year"></span> Mapawa Baptist Church Youth Ministry</div></div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+async function handleContact(e) {
+  e.preventDefault();
+  const name    = document.getElementById('c-name').value.trim();
+  const message = document.getElementById('c-message').value.trim();
+  if (!name || !message) { alert('Please fill in your name and message.'); return; }
+
+  const btn = e.target;
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const body = new FormData();
+  body.append('name',      name);
+  body.append('email',     document.getElementById('c-email').value.trim());
+  body.append('age_group', document.getElementById('c-age').value);
+  body.append('subject',   document.getElementById('c-subject').value);
+  body.append('message',   message);
+
+  try {
+    const res  = await fetch('api/submit-contact.php', { method: 'POST', body });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('contact-success').style.display = 'block';
+      document.getElementById('contact-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      alert(data.message || 'Something went wrong. Please try again.');
+      btn.disabled = false;
+      btn.textContent = 'Send Message →';
+    }
+  } catch (err) {
+    alert('Network error. Please check your connection and try again.');
+    btn.disabled = false;
+    btn.textContent = 'Send Message →';
+  }
+}
+</script>
+</body>
+</html>

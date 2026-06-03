@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prayer Requests — Mapawa Baptist Youth Ministry</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/logo.svg" alt="MBC Logo" class="nav-logo" />
+      <div class="nav-name">Mapawa Baptist<span>Youth Ministry</span></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Sermons</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="prayers.html">Prayers</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <a href="admin/login.php">Admin</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="page-banner" style="background:linear-gradient(160deg,var(--burgundy) 0%,var(--burgundy-dk) 100%);">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 40%,rgba(245,200,66,0.1) 0%,transparent 60%);"></div>
+  <div class="page-banner-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Prayers</div>
+    <h1>Prayer Requests</h1>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:start;">
+
+      <!-- Form -->
+      <div class="fade-in">
+        <div class="section-label">Bring It to God</div>
+        <h2 class="section-title">Share Your Prayer Request</h2>
+        <p style="color:var(--text-mid);margin-bottom:10px;">
+          We believe in the power of prayer. Our youth leaders and prayer team take every request seriously and commit to lifting them before God.
+        </p>
+        <div class="scripture-block" style="margin-bottom:32px;">
+          <p>"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God."</p>
+          <cite>— Philippians 4:6</cite>
+        </div>
+
+        <form id="prayer-form" style="background:var(--cream-dark);border-radius:var(--radius-lg);padding:36px;">
+          <div class="grid-2" style="gap:16px;">
+            <div class="form-group">
+              <label class="form-label" for="pray-name">Your Name</label>
+              <input type="text" id="pray-name" class="form-control" placeholder="First name is fine" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pray-category">Category</label>
+              <select id="pray-category" class="form-control">
+                <option value="">Select a category…</option>
+                <option>Health &amp; Healing</option>
+                <option>Family</option>
+                <option>School &amp; Career</option>
+                <option>Salvation of Someone</option>
+                <option>Personal Growth</option>
+                <option>Relationship</option>
+                <option>Guidance &amp; Direction</option>
+                <option>Praise &amp; Thanksgiving</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pray-request">Your Prayer Request</label>
+            <textarea id="pray-request" class="form-control" style="min-height:140px;" placeholder="Share what's on your heart. You can be as specific or as general as you'd like…"></textarea>
+          </div>
+          <div class="form-group">
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:0.92rem;color:var(--text-mid);">
+              <input type="checkbox" id="pray-anonymous" style="margin-top:3px;" />
+              Keep my request anonymous (your name will not be shared publicly)
+            </label>
+          </div>
+          <div class="form-group">
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:0.92rem;color:var(--text-mid);">
+              <input type="checkbox" id="pray-public" />
+              Allow this request to be shared with the prayer group
+            </label>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:8px;" onclick="handlePrayerSubmit(event)">
+            🙏 Submit Prayer Request
+          </button>
+        </form>
+
+        <div id="prayer-success" style="display:none;background:linear-gradient(135deg,#1a5c1a,#0d3b0d);border-radius:var(--radius-lg);padding:40px;text-align:center;margin-top:20px;">
+          <div style="font-size:2.5rem;margin-bottom:12px;">🙏</div>
+          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:var(--cream);margin-bottom:10px;">Your Request Has Been Received</h3>
+          <p style="font-size:0.98rem;color:rgba(255,249,238,0.8);">Thank you for trusting us with your prayer. Our team will be lifting you before God. Remember — He hears every prayer.</p>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div style="display:flex;flex-direction:column;gap:24px;" class="fade-in">
+        <div style="background:var(--blue-deep);border-radius:var(--radius-lg);padding:28px;">
+          <h4 style="font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-rich);margin-bottom:16px;">Why Prayer Matters</h4>
+          <p style="font-size:0.95rem;color:rgba(255,249,238,0.75);line-height:1.7;margin-bottom:16px;">Prayer is not just asking God for things — it is entering into relationship with Him. When we pray, we acknowledge that He is God and we are not.</p>
+          <p style="font-size:0.95rem;color:rgba(255,249,238,0.75);line-height:1.7;">At Mapawa Baptist Youth Ministry, prayer is one of our four pillars. We pray in our gatherings, in our small groups, and for one another personally.</p>
+        </div>
+
+        <div style="background:var(--cream-dark);border-radius:var(--radius-lg);padding:28px;">
+          <h4 style="font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-mid);margin-bottom:16px;">Prayer Promises</h4>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="scripture-block" style="margin:0;">
+              <p style="font-size:0.95rem;">"The prayer of a righteous person is powerful and effective."</p>
+              <cite>— James 5:16</cite>
+            </div>
+            <div class="scripture-block" style="margin:0;">
+              <p style="font-size:0.95rem;">"Ask and it will be given to you; seek and you will find."</p>
+              <cite>— Matthew 7:7</cite>
+            </div>
+            <div class="scripture-block" style="margin:0;">
+              <p style="font-size:0.95rem;">"Cast all your anxiety on him because he cares for you."</p>
+              <cite>— 1 Peter 5:7</cite>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:linear-gradient(135deg,var(--burgundy),var(--burgundy-dk));border-radius:var(--radius-lg);padding:24px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:10px;">✉️</div>
+          <h4 style="font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:8px;">Need to talk?</h4>
+          <p style="font-size:0.9rem;color:rgba(255,249,238,0.75);margin-bottom:14px;">If your need is urgent, reach out directly to our youth leaders.</p>
+          <a href="contact.html" class="btn btn-gold btn-sm">Contact Us →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/images/logo.svg" alt="MBC Logo" style="width:64px;margin-bottom:12px;" />
+      <p>Mapawa Baptist Church Youth Ministry — raising a generation for God's glory in Cagayan de Oro.</p>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><ul>
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Sermons</a></li><li><a href="events.html">Events</a></li>
+      <li><a href="gallery.html">Gallery</a></li><li><a href="prayers.html">Prayers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Service Times</h4><ul>
+      <li><a href="#">Sunday Worship · 9 AM</a></li><li><a href="#">Bible Study · Wed 6 PM</a></li>
+      <li><a href="#">Prayer Meeting · Fri 7 PM</a></li><li><a href="#">Youth Gathering · Sat 4 PM</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul>
+      <li><a href="contact.html">📍 Mapawa, CDO</a></li>
+      <li><a href="prayers.html">🙏 Prayer Requests</a></li>
+      <li><a href="admin/login.php">⚙️ Admin Portal</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><div class="container">© <span id="current-year"></span> Mapawa Baptist Church Youth Ministry</div></div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+async function handlePrayerSubmit(e) {
+  e.preventDefault();
+  const request = document.getElementById('pray-request').value.trim();
+  if (!request) { alert('Please share your prayer request before submitting.'); return; }
+
+  const btn = e.target;
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  const body = new FormData();
+  body.append('name',         document.getElementById('pray-name').value.trim());
+  body.append('category',     document.getElementById('pray-category').value);
+  body.append('request',      request);
+  body.append('is_anonymous', document.getElementById('pray-anonymous').checked ? '1' : '');
+  body.append('is_public',    document.getElementById('pray-public').checked    ? '1' : '');
+
+  try {
+    const res  = await fetch('api/submit-prayer.php', { method: 'POST', body });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('prayer-form').style.display = 'none';
+      document.getElementById('prayer-success').style.display = 'block';
+      document.getElementById('prayer-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      alert(data.message || 'Something went wrong. Please try again.');
+      btn.disabled = false;
+      btn.textContent = '🙏 Submit Prayer Request';
+    }
+  } catch (err) {
+    alert('Network error. Please check your connection and try again.');
+    btn.disabled = false;
+    btn.textContent = '🙏 Submit Prayer Request';
+  }
+}
+</script>
+</body>
+</html>

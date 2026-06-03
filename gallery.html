@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Mapawa Baptist Youth Ministry</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <style>
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .gallery-item {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--blue-deep), #0a2a5c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .gallery-item:nth-child(4n+1) { background: linear-gradient(135deg,var(--blue-deep),#0a2a5c); }
+    .gallery-item:nth-child(4n+2) { background: linear-gradient(135deg,var(--burgundy),var(--burgundy-dk)); }
+    .gallery-item:nth-child(4n+3) { background: linear-gradient(135deg,#1a5c1a,#0d3b0d); }
+    .gallery-item:nth-child(4n+4) { background: linear-gradient(135deg,#5c3a1a,#3b1a00); }
+    .gallery-item:hover { transform: scale(1.02); box-shadow: var(--shadow-deep); }
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: var(--transition);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .gallery-item:hover .overlay { background: rgba(0,0,0,0.5); }
+    .gallery-caption {
+      font-family: var(--font-display);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: var(--transition);
+    }
+    .gallery-item:hover .gallery-caption { opacity: 1; transform: none; }
+    .gallery-placeholder {
+      font-size: 2.5rem;
+      opacity: 0.3;
+    }
+    .gallery-item.featured { grid-column: span 2; aspect-ratio: 16/7; }
+    @media (max-width: 680px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.featured { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/logo.svg" alt="MBC Logo" class="nav-logo" />
+      <div class="nav-name">Mapawa Baptist<span>Youth Ministry</span></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Sermons</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="prayers.html">Prayers</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <a href="admin/login.php">Admin</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="page-banner">
+  <div class="page-banner-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Gallery</div>
+    <h1>Photo Gallery</h1>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="text-center mb-40 fade-in">
+      <div class="section-label">Moments Together</div>
+      <h2 class="section-title">Our Community in Photos</h2>
+      <p class="section-sub gap-center" style="margin:0 auto;">Glimpses of God's work in and through our youth ministry — worship, service, fellowship, and growth.</p>
+    </div>
+
+    <!-- Category Tabs -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;" class="fade-in">
+      <button onclick="showCategory('all')" id="cat-all" class="gallery-cat active-cat">All</button>
+      <button onclick="showCategory('worship')" id="cat-worship" class="gallery-cat">Worship</button>
+      <button onclick="showCategory('outreach')" id="cat-outreach" class="gallery-cat">Outreach</button>
+      <button onclick="showCategory('retreat')" id="cat-retreat" class="gallery-cat">Retreats</button>
+      <button onclick="showCategory('fellowship')" id="cat-fellowship" class="gallery-cat">Fellowship</button>
+    </div>
+
+    <style>
+      .gallery-cat { font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;padding:8px 18px;border-radius:2px;border:1px solid rgba(13,59,122,0.2);background:transparent;color:var(--text-mid);cursor:pointer;transition:var(--transition); }
+      .active-cat { background:var(--gold-rich);color:var(--blue-deep);border-color:var(--gold-rich); }
+    </style>
+
+    <div class="gallery-grid fade-in" id="gallery">
+      <div class="gallery-item featured" data-cat="worship">
+        <div class="gallery-placeholder">🙌</div>
+        <div class="overlay"><span class="gallery-caption">Sunday Worship Service</span></div>
+      </div>
+      <div class="gallery-item" data-cat="outreach">
+        <div class="gallery-placeholder">🤝</div>
+        <div class="overlay"><span class="gallery-caption">Community Outreach</span></div>
+      </div>
+      <div class="gallery-item" data-cat="fellowship">
+        <div class="gallery-placeholder">🎉</div>
+        <div class="overlay"><span class="gallery-caption">Youth Fellowship Night</span></div>
+      </div>
+      <div class="gallery-item" data-cat="retreat">
+        <div class="gallery-placeholder">⛺</div>
+        <div class="overlay"><span class="gallery-caption">Youth Retreat 2024</span></div>
+      </div>
+      <div class="gallery-item" data-cat="worship">
+        <div class="gallery-placeholder">🎵</div>
+        <div class="overlay"><span class="gallery-caption">Praise &amp; Worship</span></div>
+      </div>
+      <div class="gallery-item featured" data-cat="retreat">
+        <div class="gallery-placeholder">🌿</div>
+        <div class="overlay"><span class="gallery-caption">Mapawa Nature Park Retreat</span></div>
+      </div>
+      <div class="gallery-item" data-cat="outreach">
+        <div class="gallery-placeholder">🍱</div>
+        <div class="overlay"><span class="gallery-caption">Feeding Program</span></div>
+      </div>
+      <div class="gallery-item" data-cat="fellowship">
+        <div class="gallery-placeholder">😊</div>
+        <div class="overlay"><span class="gallery-caption">Small Group Time</span></div>
+      </div>
+      <div class="gallery-item" data-cat="worship">
+        <div class="gallery-placeholder">✝️</div>
+        <div class="overlay"><span class="gallery-caption">Worship Night</span></div>
+      </div>
+    </div>
+
+    <!-- Upload prompt -->
+    <div style="text-align:center;margin-top:40px;padding:40px;background:var(--cream-dark);border-radius:var(--radius-lg);border:2px dashed rgba(13,59,122,0.15);" class="fade-in">
+      <div style="font-size:2rem;margin-bottom:12px;opacity:0.5;">📷</div>
+      <div style="font-family:var(--font-display);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-light);margin-bottom:8px;">Photo Submissions</div>
+      <p style="font-size:0.95rem;color:var(--text-mid);margin-bottom:16px;">Have photos from our events? Share them with us and we'll add them to the gallery.</p>
+      <a href="contact.html" class="btn btn-gold btn-sm">Submit Photos →</a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/images/logo.svg" alt="MBC Logo" style="width:64px;margin-bottom:12px;" />
+      <p>Mapawa Baptist Church Youth Ministry — raising a generation for God's glory in Cagayan de Oro.</p>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><ul>
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Sermons</a></li><li><a href="events.html">Events</a></li>
+      <li><a href="gallery.html">Gallery</a></li><li><a href="prayers.html">Prayers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Service Times</h4><ul>
+      <li><a href="#">Sunday Worship · 9 AM</a></li><li><a href="#">Bible Study · Wed 6 PM</a></li>
+      <li><a href="#">Youth Gathering · Sat 4 PM</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul>
+      <li><a href="contact.html">📍 Mapawa, CDO</a></li>
+      <li><a href="prayers.html">🙏 Prayer Requests</a></li>
+      <li><a href="admin/login.php">⚙️ Admin Portal</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><div class="container">© <span id="current-year"></span> Mapawa Baptist Church Youth Ministry</div></div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+function showCategory(cat) {
+  document.querySelectorAll('.gallery-cat').forEach(b => b.classList.remove('active-cat'));
+  document.getElementById('cat-' + cat).classList.add('active-cat');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
