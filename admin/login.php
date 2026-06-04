@@ -38,16 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Login — <?= SITE_NAME ?></title>
   <link rel="stylesheet" href="../assets/css/main.css" />
-<<<<<<< HEAD
   <link rel="stylesheet" href="../assets/css/responsive.css" />
-=======
->>>>>>> 310179d017a02a2e6efd72b43d0ae2cc00e11cd9
   <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg" />
   <style>
     body { background: #07111f; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
     .login-wrap { width: 100%; max-width: 420px; padding: 24px; }
     .login-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(245,200,66,0.15); border-radius: 12px; padding: 44px 40px; }
-<<<<<<< HEAD
     @media (max-width: 480px) {
       .login-wrap { padding: 16px; }
       .login-box  { padding: 32px 22px; border-radius: 8px; }
@@ -56,8 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     @media (max-width: 360px) {
       .login-box { padding: 24px 16px; }
     }
-=======
->>>>>>> 310179d017a02a2e6efd72b43d0ae2cc00e11cd9
     .login-logo { width: 72px; margin: 0 auto 20px; display: block; filter: drop-shadow(0 0 16px rgba(245,200,66,0.3)); }
     .login-title { font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-rich); text-align: center; margin-bottom: 4px; }
     .login-sub { font-family: var(--font-serif); font-size: 1rem; color: rgba(255,249,238,0.5); text-align: center; margin-bottom: 32px; }
