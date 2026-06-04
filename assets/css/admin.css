@@ -398,4 +398,17 @@ textarea.a-input { resize: vertical; min-height: 100px; }
 .a-pagination a:hover { color: var(--gold-bright); border-color: var(--gold-rich); }
 .a-pagination .current { background: var(--gold-rich); color: var(--blue-deep); border-color: var(--gold-rich); }
 
+<<<<<<< HEAD
 /* ── Responsive styles live in assets/css/responsive.css ──── */
+=======
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .admin-sidebar { transform: translateX(-100%); }
+  .admin-sidebar.open { transform: none; }
+  .admin-content { margin-left: 0; }
+  .admin-menu-toggle { display: block; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .a-grid-2, .a-grid-3 { grid-template-columns: 1fr; }
+  .admin-main { padding: 20px 16px; }
+}
+>>>>>>> 310179d017a02a2e6efd72b43d0ae2cc00e11cd9

@@ -27,7 +27,10 @@ function admin_head(string $title): void {
   <title><?= htmlspecialchars($title) ?> — Admin · <?= SITE_NAME ?></title>
   <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/main.css" />
   <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/admin.css" />
+<<<<<<< HEAD
   <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/responsive.css" />
+=======
+>>>>>>> 310179d017a02a2e6efd72b43d0ae2cc00e11cd9
   <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/logo.svg" />
 </head>
 <body class="admin-body">
