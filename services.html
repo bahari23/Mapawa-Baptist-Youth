@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d3b7a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Sermons — Mapawa Baptist Youth Ministry</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/logo.svg" alt="MBC Logo" class="nav-logo" />
+      <div class="nav-name">Mapawa Baptist<span>Youth Ministry</span></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Sermons</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="prayers.html">Prayers</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <a href="admin/login.php">Admin</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="page-banner">
+  <div class="page-banner-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Sermons</div>
+    <h1>Sermon Library</h1>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="text-center mb-40 fade-in">
+      <div class="section-label">The Word of God</div>
+      <h2 class="section-title">Teachings & Messages</h2>
+      <p class="section-sub gap-center" style="margin:0 auto;">Every message is rooted in Scripture and aimed at equipping young disciples for life and ministry.</p>
+    </div>
+
+    <!-- Filter row -->
+    <div class="filter-row fade-in">
+      <button onclick="filterSermons('all')" id="filter-all" class="gallery-cat active-cat">All</button>
+      <button onclick="filterSermons('series')" id="filter-series" class="gallery-cat">Series</button>
+      <button onclick="filterSermons('standalone')" id="filter-standalone" class="gallery-cat">Standalone</button>
+    </div>
+
+    <div id="sermon-grid" class="grid-3 fade-in">
+
+      <!-- Sermon 001 -->
+      <div class="card sermon-card" data-type="series">
+        <div style="background:linear-gradient(135deg,var(--blue-deep),#0a2a5c);height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(245,200,66,0.12) 0%,transparent 70%);"></div>
+          <span style="font-size:2.8rem;position:relative;">📖</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Series · 001</span>
+          <div class="card-title">Foundation of the Youth Ministry</div>
+          <div class="card-meta">📅 Recent · 🕐 ~45 min</div>
+          <p class="card-text">Understanding the biblical foundation of what it means to be the church — especially as young believers called to gather, grow, and go.</p>
+          <a href="services/service-001-foundation-of-the-youth-ministry.html" class="btn btn-gold btn-sm" style="margin-top:16px;">View Sermon →</a>
+        </div>
+      </div>
+
+      <!-- Sermon 002 -->
+      <div class="card sermon-card" data-type="series">
+        <div style="background:linear-gradient(135deg,var(--burgundy),var(--burgundy-dk));height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(245,200,66,0.1) 0%,transparent 70%);"></div>
+          <span style="font-size:2.8rem;position:relative;">🕊️</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Series · 002</span>
+          <div class="card-title">Walking in the Spirit</div>
+          <div class="card-meta">📅 Coming Soon</div>
+          <p class="card-text">What does it practically look like to live a Spirit-empowered life? A message for every young person navigating real-world pressures.</p>
+          <a href="services/service-002.html" class="btn btn-outline btn-sm" style="border-color:var(--blue-mid);color:var(--blue-mid);margin-top:16px;">View Details →</a>
+        </div>
+      </div>
+
+      <!-- Sermon 003 -->
+      <div class="card sermon-card" data-type="series">
+        <div style="background:linear-gradient(135deg,#1a5c1a,#0d3b0d);height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(245,200,66,0.1) 0%,transparent 70%);"></div>
+          <span style="font-size:2.8rem;position:relative;">🌿</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Series · 003</span>
+          <div class="card-title">Rooted &amp; Grounded in Love</div>
+          <div class="card-meta">📅 Coming Soon</div>
+          <p class="card-text">Exploring Ephesians 3 — how being loved by God is the foundation of our identity, security, and purpose as young believers.</p>
+          <a href="services/service-003.html" class="btn btn-outline btn-sm" style="border-color:var(--blue-mid);color:var(--blue-mid);margin-top:16px;">View Details →</a>
+        </div>
+      </div>
+
+      <!-- Sermon 004 -->
+      <div class="card sermon-card" data-type="standalone">
+        <div style="background:linear-gradient(135deg,#5c3a1a,#3b1a00);height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(245,200,66,0.1) 0%,transparent 70%);"></div>
+          <span style="font-size:2.8rem;position:relative;">✝️</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Standalone · 004</span>
+          <div class="card-title">The Cross Changes Everything</div>
+          <div class="card-meta">📅 Coming Soon</div>
+          <p class="card-text">A special message unpacking the power of the cross — why it is not just the starting point, but the centre of all Christian living.</p>
+          <a href="services/service-004.html" class="btn btn-outline btn-sm" style="border-color:var(--blue-mid);color:var(--blue-mid);margin-top:16px;">View Details →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Scripture Band -->
+<section class="section-sm band-burgundy">
+  <div class="container-narrow text-center">
+    <p style="font-family:var(--font-serif);font-style:italic;font-size:1.3rem;color:rgba(255,249,238,0.9);margin-bottom:12px;">"All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness."</p>
+    <cite style="font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-rich);">— 2 Timothy 3:16</cite>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/images/logo.svg" alt="MBC Logo" style="width:64px;margin-bottom:12px;" />
+      <p>Mapawa Baptist Church Youth Ministry — raising a generation for God's glory in Cagayan de Oro.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Sermons</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="prayers.html">Prayers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Service Times</h4>
+      <ul>
+        <li><a href="#">Sunday Worship · 9 AM</a></li>
+        <li><a href="#">Youth Service · 10:30 AM</a></li>
+        <li><a href="#">Bible Study · Wed 6 PM</a></li>
+        <li><a href="#">Youth Gathering · Sat 4 PM</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="contact.html">📍 Mapawa, CDO</a></li>
+        <li><a href="prayers.html">🙏 Prayer Requests</a></li>
+        <li><a href="admin/login.php">⚙️ Admin Portal</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">© <span id="current-year"></span> Mapawa Baptist Church Youth Ministry</div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+function filterSermons(type) {
+  const cards = document.querySelectorAll('.sermon-card');
+  const btns = document.querySelectorAll('[id^="filter-"]');
+  btns.forEach(b => {
+    b.style.background = 'transparent';
+    b.style.color = 'var(--text-mid)';
+    b.style.border = '1px solid rgba(13,59,122,0.2)';
+  });
+  const active = document.getElementById('filter-' + type);
+  if (active) {
+    active.style.background = 'var(--gold-rich)';
+    active.style.color = 'var(--blue-deep)';
+    active.style.border = '1px solid var(--gold-rich)';
+  }
+  cards.forEach(card => {
+    card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

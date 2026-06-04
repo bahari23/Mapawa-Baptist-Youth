@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Upload Sermons · Mapawa Baptist Youth Ministry</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg" />
+  <style>
+    body { background: #0d1a2e; }
+    .admin-layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; padding-top: 70px; }
+    .admin-sidebar {
+      background: rgba(255,255,255,0.03);
+      border-right: 1px solid rgba(245,200,66,0.1);
+      padding: 32px 0;
+      position: sticky;
+      top: 70px;
+      height: calc(100vh - 70px);
+      overflow-y: auto;
+    }
+    .admin-sidebar-title {
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(245,200,66,0.5);
+      padding: 0 24px 12px;
+      border-bottom: 1px solid rgba(245,200,66,0.08);
+      margin-bottom: 16px;
+    }
+    .admin-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,249,238,0.55);
+      transition: var(--transition);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .admin-nav-link:hover, .admin-nav-link.active {
+      color: var(--gold-bright);
+      background: rgba(245,200,66,0.06);
+    }
+    .admin-nav-link.active { border-left: 2px solid var(--gold-rich); }
+    .admin-main { padding: 40px 48px; }
+    .admin-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,200,66,0.1);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .admin-card h3 {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-rich);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(245,200,66,0.1);
+    }
+    .admin-form-label {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,249,238,0.5);
+      margin-bottom: 6px;
+    }
+    .admin-input {
+      width: 100%;
+      padding: 11px 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(245,200,66,0.15);
+      border-radius: var(--radius);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .admin-input:focus { border-color: var(--gold-rich); background: rgba(255,255,255,0.08); }
+    .admin-input option { background: #0d1a2e; }
+    textarea.admin-input { resize: vertical; min-height: 100px; }
+    .upload-zone {
+      border: 2px dashed rgba(245,200,66,0.2);
+      border-radius: var(--radius-lg);
+      padding: 48px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+    .upload-zone:hover { border-color: var(--gold-rich); background: rgba(245,200,66,0.03); }
+    .upload-zone input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,200,66,0.1);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,249,238,0.4);
+    }
+    .sermon-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(245,200,66,0.07);
+    }
+    .sermon-row:last-child { border-bottom: none; }
+    .badge-live {
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      background: rgba(26,92,26,0.3);
+      color: #6dbf6d;
+      border: 1px solid rgba(26,92,26,0.4);
+    }
+    .badge-draft {
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      background: rgba(232,160,0,0.15);
+      color: var(--gold-rich);
+      border: 1px solid rgba(232,160,0,0.3);
+    }
+    .tab-btn {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 9px 20px;
+      border-radius: 2px;
+      border: 1px solid rgba(245,200,66,0.15);
+      background: transparent;
+      color: rgba(255,249,238,0.5);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .tab-btn.active { background: var(--gold-rich); color: var(--blue-deep); border-color: var(--gold-rich); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    @media (max-width: 900px) {
+      .admin-layout { grid-template-columns: 1fr; }
+      .admin-sidebar { display: none; }
+      .admin-main { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/images/logo.svg" alt="MBC Logo" class="nav-logo" />
+      <div class="nav-name">Mapawa Baptist<span>Admin Portal</span></div>
+    </a>
+    <nav class="nav-links">
+      <a href="../index.html">← Back to Site</a>
+      <a href="login.php">Admin</a>
+      <a href="#" class="nav-cta" onclick="showLoginPrompt()">🔒 Logged In</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-title">Admin Menu</div>
+    <a class="admin-nav-link active" onclick="switchTab('upload')">📤 Upload Sermon</a>
+    <a class="admin-nav-link" onclick="switchTab('manage')">📋 Manage Sermons</a>
+    <a class="admin-nav-link" onclick="switchTab('prayers')">🙏 Prayer Requests</a>
+    <a class="admin-nav-link" onclick="switchTab('events')">📅 Manage Events</a>
+    <a class="admin-nav-link" onclick="switchTab('gallery')">🖼️ Gallery Upload</a>
+    <div style="height:1px;background:rgba(245,200,66,0.08);margin:16px 0;"></div>
+    <a class="admin-nav-link" href="../index.html">🌐 View Site</a>
+    <a class="admin-nav-link" href="../services.html">📖 Sermons Page</a>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+
+    <!-- Stats Row -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;">
+      <div class="stat-box">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Total Sermons</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Published</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Drafts</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="prayer-count">0</div>
+        <div class="stat-label">Prayer Requests</div>
+      </div>
+    </div>
+
+    <!-- Tab Buttons -->
+    <div style="display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;">
+      <button class="tab-btn active" id="tab-upload" onclick="switchTab('upload')">Upload Sermon</button>
+      <button class="tab-btn" id="tab-manage" onclick="switchTab('manage')">Manage Sermons</button>
+      <button class="tab-btn" id="tab-prayers" onclick="switchTab('prayers')">Prayer Requests</button>
+      <button class="tab-btn" id="tab-events" onclick="switchTab('events')">Events</button>
+      <button class="tab-btn" id="tab-gallery" onclick="switchTab('gallery')">Gallery</button>
+    </div>
+
+    <!-- ── UPLOAD SERMON TAB ──────────────────────────── -->
+    <div class="tab-panel active" id="panel-upload">
+      <div class="admin-card">
+        <h3>📤 Upload New Sermon</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="margin-bottom:16px;">
+            <label class="admin-form-label">Sermon Title *</label>
+            <input type="text" class="admin-input" id="s-title" placeholder="e.g. Foundation of the Youth Ministry" />
+          </div>
+          <div style="margin-bottom:16px;">
+            <label class="admin-form-label">Series / Category</label>
+            <select class="admin-input" id="s-series">
+              <option value="">Standalone / None</option>
+              <option>Ministry Foundations</option>
+              <option>Walking in the Spirit</option>
+              <option>Special Message</option>
+              <option>New Series…</option>
+            </select>
+          </div>
+          <div style="margin-bottom:16px;">
+            <label class="admin-form-label">Speaker</label>
+            <input type="text" class="admin-input" id="s-speaker" placeholder="e.g. Youth Pastor" />
+          </div>
+          <div style="margin-bottom:16px;">
+            <label class="admin-form-label">Date Preached</label>
+            <input type="date" class="admin-input" id="s-date" />
+          </div>
+          <div style="margin-bottom:16px;">
+            <label class="admin-form-label">Scripture Reference</label>
+            <input type="text" class="admin-input" id="s-scripture" placeholder="e.g. Acts 2:42–47" />
+          </div>
+          <div style="margin-bottom:16px;">
+            <label class="admin-form-label">Duration</label>
+            <input type="text" class="admin-input" id="s-duration" placeholder="e.g. 45 min" />
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label class="admin-form-label">Sermon Description</label>
+          <textarea class="admin-input" id="s-desc" placeholder="Brief overview of the message…"></textarea>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label class="admin-form-label">Key Points (one per line)</label>
+          <textarea class="admin-input" id="s-points" placeholder="1. The Church is God's Idea&#10;2. Youth Ministry is Discipleship&#10;3. You are Here on Purpose"></textarea>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <!-- Audio Upload -->
+          <div>
+            <label class="admin-form-label">Audio File (MP3 / WAV)</label>
+            <div class="upload-zone" id="audio-zone" ondragover="dragOver(event,'audio-zone')" ondragleave="dragLeave('audio-zone')" ondrop="dropFile(event,'audio-zone','audio')">
+              <input type="file" accept="audio/*" onchange="fileChosen(this,'audio-zone','audio')" />
+              <div id="audio-zone-icon" style="font-size:2rem;margin-bottom:8px;opacity:0.4;">🎵</div>
+              <div id="audio-zone-text" style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,249,238,0.4);">Drop audio or click to browse</div>
+            </div>
+          </div>
+          <!-- Video Upload -->
+          <div>
+            <label class="admin-form-label">Video File (MP4) or YouTube URL</label>
+            <div class="upload-zone" id="video-zone" ondragover="dragOver(event,'video-zone')" ondragleave="dragLeave('video-zone')" ondrop="dropFile(event,'video-zone','video')">
+              <input type="file" accept="video/*" onchange="fileChosen(this,'video-zone','video')" />
+              <div id="video-zone-icon" style="font-size:2rem;margin-bottom:8px;opacity:0.4;">🎬</div>
+              <div id="video-zone-text" style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,249,238,0.4);">Drop video or click to browse</div>
+            </div>
+            <input type="text" class="admin-input" id="s-youtube" placeholder="Or paste YouTube link…" style="margin-top:10px;" />
+          </div>
+        </div>
+
+        <!-- PDF Notes -->
+        <div style="margin-bottom:24px;">
+          <label class="admin-form-label">Sermon Notes (PDF)</label>
+          <div class="upload-zone" id="pdf-zone" style="padding:24px;" ondragover="dragOver(event,'pdf-zone')" ondragleave="dragLeave('pdf-zone')" ondrop="dropFile(event,'pdf-zone','pdf')">
+            <input type="file" accept=".pdf" onchange="fileChosen(this,'pdf-zone','pdf')" />
+            <div id="pdf-zone-text" style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,249,238,0.4);">📄 Drop PDF or click to browse</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:center;">
+          <button class="btn btn-gold" onclick="uploadSermon()">✓ Save &amp; Publish</button>
+          <button class="btn btn-outline" style="border-color:rgba(255,249,238,0.2);color:rgba(255,249,238,0.6);" onclick="saveDraft()">Save as Draft</button>
+          <div id="upload-feedback" style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-rich);display:none;"></div>
+        </div>
+      </div>
+
+      <!-- Progress bar (hidden by default) -->
+      <div id="progress-wrap" style="display:none;background:rgba(255,255,255,0.04);border:1px solid rgba(245,200,66,0.1);border-radius:var(--radius-lg);padding:24px;">
+        <div style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-rich);margin-bottom:12px;" id="progress-label">Uploading…</div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:6px;overflow:hidden;">
+          <div id="progress-bar" style="height:100%;background:var(--gold-rich);width:0%;transition:width 0.4s ease;border-radius:4px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MANAGE SERMONS TAB ─────────────────────────── -->
+    <div class="tab-panel" id="panel-manage">
+      <div class="admin-card">
+        <h3>📋 All Sermons</h3>
+        <div id="sermon-list">
+          <div class="sermon-row">
+            <div style="width:36px;height:36px;background:rgba(245,200,66,0.1);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">📖</div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--cream);">Foundation of the Youth Ministry</div>
+              <div style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,249,238,0.4);">Series 001 · Acts 2:42–47</div>
+            </div>
+            <span class="badge-live">Published</span>
+            <a href="../services/service-001-foundation-of-the-youth-ministry.html" style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-rich);">View →</a>
+          </div>
+          <div class="sermon-row">
+            <div style="width:36px;height:36px;background:rgba(245,200,66,0.1);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">🕊️</div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--cream);">Walking in the Spirit</div>
+              <div style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,249,238,0.4);">Series 002 · No media yet</div>
+            </div>
+            <span class="badge-draft">Draft</span>
+            <a href="../services/service-002.html" style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-rich);">View →</a>
+          </div>
+          <div class="sermon-row">
+            <div style="width:36px;height:36px;background:rgba(245,200,66,0.1);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">🌿</div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--cream);">Rooted &amp; Grounded in Love</div>
+              <div style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,249,238,0.4);">Series 003 · No media yet</div>
+            </div>
+            <span class="badge-draft">Draft</span>
+            <a href="../services/service-003.html" style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-rich);">View →</a>
+          </div>
+          <div class="sermon-row">
+            <div style="width:36px;height:36px;background:rgba(245,200,66,0.1);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">✝️</div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--cream);">The Cross Changes Everything</div>
+              <div style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,249,238,0.4);">Series 004 · No media yet</div>
+            </div>
+            <span class="badge-draft">Draft</span>
+            <a href="../services/service-004.html" style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-rich);">View →</a>
+          </div>
+        </div>
+        <div style="margin-top:20px;">
+          <button class="btn btn-gold btn-sm" onclick="switchTab('upload')">+ Add New Sermon</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PRAYER REQUESTS TAB ───────────────────────── -->
+    <div class="tab-panel" id="panel-prayers">
+      <div class="admin-card">
+        <h3>🙏 Prayer Requests</h3>
+        <div id="prayer-list">
+          <div style="text-align:center;padding:40px;color:rgba(255,249,238,0.3);">
+            <div style="font-size:2rem;margin-bottom:8px;">🙏</div>
+            <div style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;">No prayer requests yet</div>
+            <p style="font-size:0.9rem;margin-top:8px;">Requests submitted through the <a href="../prayers.html" style="color:var(--gold-rich);">Prayers page</a> will appear here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EVENTS TAB ────────────────────────────────── -->
+    <div class="tab-panel" id="panel-events">
+      <div class="admin-card">
+        <h3>📅 Add / Edit Events</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <label class="admin-form-label">Event Name *</label>
+            <input type="text" class="admin-input" placeholder="e.g. Youth Retreat 2025" />
+          </div>
+          <div>
+            <label class="admin-form-label">Event Date *</label>
+            <input type="date" class="admin-input" />
+          </div>
+          <div>
+            <label class="admin-form-label">Time</label>
+            <input type="time" class="admin-input" />
+          </div>
+          <div>
+            <label class="admin-form-label">Location</label>
+            <input type="text" class="admin-input" placeholder="e.g. Mapawa Nature Park" />
+          </div>
+          <div>
+            <label class="admin-form-label">Category</label>
+            <select class="admin-input">
+              <option>Retreat</option>
+              <option>Outreach</option>
+              <option>Worship</option>
+              <option>Training</option>
+              <option>General</option>
+            </select>
+          </div>
+          <div>
+            <label class="admin-form-label">Open To</label>
+            <input type="text" class="admin-input" placeholder="e.g. All Registered Youth" />
+          </div>
+        </div>
+        <div style="margin-bottom:20px;">
+          <label class="admin-form-label">Event Description</label>
+          <textarea class="admin-input" placeholder="Describe the event…"></textarea>
+        </div>
+        <button class="btn btn-gold" onclick="showFeedback('event-fb','Event saved!')">Save Event</button>
+        <span id="event-fb" style="display:none;font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-rich);margin-left:14px;"></span>
+      </div>
+    </div>
+
+    <!-- ── GALLERY TAB ───────────────────────────────── -->
+    <div class="tab-panel" id="panel-gallery">
+      <div class="admin-card">
+        <h3>🖼️ Upload Gallery Photos</h3>
+        <div style="margin-bottom:16px;">
+          <label class="admin-form-label">Category</label>
+          <select class="admin-input" style="max-width:260px;">
+            <option>Worship</option>
+            <option>Outreach</option>
+            <option>Retreat</option>
+            <option>Fellowship</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="upload-zone" id="gallery-zone" style="padding:56px;" ondragover="dragOver(event,'gallery-zone')" ondragleave="dragLeave('gallery-zone')" ondrop="dropFile(event,'gallery-zone','gallery')">
+          <input type="file" accept="image/*" multiple onchange="galleryChosen(this)" />
+          <div style="font-size:2.5rem;margin-bottom:12px;opacity:0.35;">🖼️</div>
+          <div style="font-family:var(--font-display);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,249,238,0.35);">Drop images or click to browse</div>
+          <div style="font-size:0.82rem;color:rgba(255,249,238,0.2);margin-top:6px;">JPG, PNG, WEBP · Multiple files OK</div>
+        </div>
+        <div id="gallery-preview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px;"></div>
+        <div style="margin-top:20px;display:flex;gap:12px;">
+          <button class="btn btn-gold" onclick="showFeedback('gallery-fb','Photos saved to gallery!')">Save to Gallery</button>
+          <span id="gallery-fb" style="display:none;font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-rich);line-height:2.5;"></span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+// Tab switching
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  const tb = document.getElementById('tab-' + name);
+  if (tb) tb.classList.add('active');
+}
+
+// Drag & drop helpers
+function dragOver(e, id) {
+  e.preventDefault();
+  document.getElementById(id).style.borderColor = 'var(--gold-rich)';
+  document.getElementById(id).style.background = 'rgba(245,200,66,0.05)';
+}
+function dragLeave(id) {
+  document.getElementById(id).style.borderColor = '';
+  document.getElementById(id).style.background = '';
+}
+function dropFile(e, id, type) {
+  e.preventDefault();
+  dragLeave(id);
+  const file = e.dataTransfer.files[0];
+  if (file) showFileChosen(id, type, file.name);
+}
+function fileChosen(input, id, type) {
+  if (input.files[0]) showFileChosen(id, type, input.files[0].name);
+}
+function showFileChosen(id, type, name) {
+  const icons = { audio:'🎵', video:'🎬', pdf:'📄', gallery:'🖼️' };
+  const zone = document.getElementById(id);
+  zone.style.borderColor = 'var(--gold-rich)';
+  zone.style.background = 'rgba(245,200,66,0.04)';
+  const icon = document.getElementById(id + '-icon');
+  if (icon) { icon.textContent = icons[type] || '✓'; icon.style.opacity = '1'; }
+  const text = document.getElementById(id + '-text');
+  if (text) { text.textContent = name; text.style.color = 'var(--gold-bright)'; }
+  else {
+    zone.querySelector('div:last-child').textContent = name;
+    zone.querySelector('div:last-child').style.color = 'var(--gold-bright)';
+  }
+}
+
+// Gallery multi-preview
+function galleryChosen(input) {
+  const preview = document.getElementById('gallery-preview');
+  preview.innerHTML = '';
+  Array.from(input.files).forEach(file => {
+    const url = URL.createObjectURL(file);
+    const div = document.createElement('div');
+    div.style.cssText = 'aspect-ratio:1;border-radius:6px;overflow:hidden;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;';
+    const img = document.createElement('img');
+    img.src = url; img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+    div.appendChild(img);
+    preview.appendChild(div);
+  });
+}
+
+// Upload simulation with progress
+function uploadSermon() {
+  const title = document.getElementById('s-title').value.trim();
+  if (!title) { alert('Please enter a sermon title.'); return; }
+  const wrap = document.getElementById('progress-wrap');
+  const bar = document.getElementById('progress-bar');
+  const label = document.getElementById('progress-label');
+  wrap.style.display = 'block';
+  let w = 0;
+  const steps = ['Uploading audio…','Processing files…','Saving sermon data…','Publishing…','Done!'];
+  let step = 0;
+  const interval = setInterval(() => {
+    w += Math.random() * 18 + 6;
+    if (w > 100) w = 100;
+    bar.style.width = w + '%';
+    label.textContent = steps[Math.floor((w / 100) * (steps.length - 1))];
+    if (w >= 100) {
+      clearInterval(interval);
+      label.textContent = '✓ Sermon published successfully!';
+      label.style.color = '#6dbf6d';
+      bar.style.background = '#4caf50';
+      const fb = document.getElementById('upload-feedback');
+      fb.textContent = '✓ Published!';
+      fb.style.display = 'inline';
+    }
+  }, 240);
+}
+
+function saveDraft() {
+  const fb = document.getElementById('upload-feedback');
+  fb.textContent = '✓ Saved as draft';
+  fb.style.display = 'inline';
+  setTimeout(() => fb.style.display = 'none', 3000);
+}
+
+function showFeedback(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = '✓ ' + msg;
+  el.style.display = 'inline';
+  setTimeout(() => el.style.display = 'none', 3000);
+}
+
+function showLoginPrompt() {
+  alert('You are logged in as Admin.\n\nTo implement real authentication, connect this portal to your backend or a service like Firebase Auth.');
+}
+</script>
+</body>
+</html>
